@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
-    int a = 7&5;
-    cout<<a;
+    string s;
+    s += 15 + ('A'-10);
+    s += '2';
+    cout<<s;
 }
