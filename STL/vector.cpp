@@ -42,4 +42,9 @@ int main(){
     vector<int> v4(2,10);
     vector<int> v5(v4);
     print(v5);
+
+    // erasing and inserting in vector;
+    vector<int> v6 = {10,20,30,40,50};
+    v6.erase(v6.begin()+1,v6.begin()+3);
+    print(v6);
 }
