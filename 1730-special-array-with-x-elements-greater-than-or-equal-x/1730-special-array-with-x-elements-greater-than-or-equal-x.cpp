@@ -1,31 +1,31 @@
 class Solution {
 public:
     int specialArray(vector<int>& arr) {
-        //answer range lies between 1-arr.size()
-        int freq[101] = {0};
-        //count --> store count of the number >= to ans
-        int count = 0 , ans = -1;
+        
+        int start = 1, end = arr.size(), mid;
 
-        for(int i=0; i<arr.size(); i++){
+        //binary search in answer range [1,arr.size()]
+        while(start <= end){
 
-            //we don't need to store the frequency of element which is  greater than arr size because ans lie in [1,arr.size()]
-            if(arr[i] <= arr.size())
-               freq[arr[i]]++;
+            mid = (start + end)/2;
 
-            if(ans <= arr[i]){
+            //calculating the number which >= mid
+            int count = 0;
+            for(int i=0; i<arr.size(); i++){
 
-                count++;
-                if(count > ans){
-
-                    ans = count;
-                    count = count - freq[ans-1];
-                }
+                if(arr[i] >= mid)
+                    count++;
             }
+
+            if(count == mid)
+                return mid;
+            else if(count < mid)
+                end = mid-1; 
+            else
+                start = mid+1;    
+        
         }
 
-        if(ans == count)
-            return ans;
-        else
-            return -1;
+        return -1;
     }
 };
