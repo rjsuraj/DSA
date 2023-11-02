@@ -1,31 +1,27 @@
 class Solution {
 public:
     int specialArray(vector<int>& arr) {
-        
-        int start = 1, end = arr.size(), mid;
+        int freq[102] = {0}, n = arr.size();
 
-        //binary search in answer range [1,arr.size()]
-        while(start <= end){
+        //storing occurence/frequency of numbers present in array
+        for(int i=0; i<n; i++)
+            //we use min here because we don't need to store the frequency
+            //of that value which > n because ans lie in range [1,n]
+            //so the values which > n for that we store the frequency to n
+            freq[min(arr[i],n)]++; 
 
-            mid = (start + end)/2;
+        //traversing the freq array from last
+        for(int i=n; i>=0; i--){
 
-            //calculating the number which >= mid
-            int count = 0;
-            for(int i=0; i<arr.size(); i++){
+            //accumlative frequency 
+            freq[i] += freq[i+1];
 
-                if(arr[i] >= mid)
-                    count++;
-            }
+            if(freq[i] == i)
+                return i;
 
-            if(count == mid)
-                return mid;
-            else if(count < mid)
-                end = mid-1; 
-            else
-                start = mid+1;    
-        
         }
 
         return -1;
+            
     }
 };
